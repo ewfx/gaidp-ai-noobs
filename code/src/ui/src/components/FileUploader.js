@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import { Container, Card, Button, Form, Alert } from "react-bootstrap";
 import { FaFileUpload } from "react-icons/fa";
+import FilePreview from "./FilePreview";
 
 const FileUploader = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedOption, setSelectedOption] = useState("");
   const [message, setMessage] = useState("");
-  const [messageType, setMessageType] = useState("danger");
+  const [messageType, setMessageType] = useState("primary");
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
-    if (file && (file.type === "text/csv" || file.name.endsWith(".csv") || file.name.endsWith(".xlsx"))) {
+    if (file && (file.name.endsWith(".csv") || file.name.endsWith(".xlsx"))) {
       setSelectedFile(file);
       setMessage("");
     } else {
@@ -25,15 +26,9 @@ const FileUploader = () => {
   };
 
   const handleSubmit = () => {
-    if (!selectedFile && !selectedOption) {
+    if (!selectedFile || !selectedOption) {
       setMessage("Please select a file and an option before submitting.");
-      setMessageType("danger");
-    } else if (!selectedFile) {
-      setMessage("Please select a file before submitting.");
-      setMessageType("danger");
-    } else if (!selectedOption) {
-      setMessage("Please select an option before submitting.");
-      setMessageType("danger");
+      setMessageType("warning");
     } else {
       setMessage(`File ${selectedFile.name} uploaded successfully with option ${selectedOption}!`);
       setMessageType("success");
@@ -41,9 +36,9 @@ const FileUploader = () => {
   };
 
   return (
-    <Container className="mt-5 d-flex justify-content-center">
-      <Card className="p-4 shadow-lg text-center" style={{ width: "400px" }}>
-        <h2 className="mb-3">Upload an XLSX or CSV Document</h2>
+    <Container className="mt-5 d-flex flex-column align-items-center">
+      <Card className="p-4 shadow-lg text-center bg-light" style={{ width: "400px" }}>
+        <h2 className="mb-3 text-primary">Upload an XLSX or CSV Document</h2>
         {message && <Alert variant={messageType}>{message}</Alert>}
         <Form>
           <Form.Group controlId="formFile" className="mb-3">
@@ -64,6 +59,7 @@ const FileUploader = () => {
           <FaFileUpload className="me-2" /> Submit
         </Button>
       </Card>
+      {selectedFile && <FilePreview file={selectedFile} />}
     </Container>
   );
 };
