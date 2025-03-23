@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Card, Table } from "react-bootstrap";
 import * as XLSX from "xlsx";
 import Papa from "papaparse";
@@ -6,12 +6,34 @@ import Papa from "papaparse";
 const FilePreview = ({ file }) => {
   const [tableData, setTableData] = useState([]);
   const [tableHeaders, setTableHeaders] = useState([]);
+  const [visibleRows, setVisibleRows] = useState(20);
+  const tableRef = useRef(null);
 
   useEffect(() => {
     if (file) {
       previewFile(file);
     }
   }, [file]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (tableRef.current) {
+        const { scrollTop, scrollHeight, clientHeight } = tableRef.current;
+        if (scrollTop + clientHeight >= scrollHeight - 20) {
+          setVisibleRows((prev) => Math.min(prev + 20, tableData.length));
+        }
+      }
+    };
+
+    if (tableRef.current) {
+      tableRef.current.addEventListener("scroll", handleScroll);
+    }
+    return () => {
+      if (tableRef.current) {
+        tableRef.current.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, [tableData]);
 
   const previewFile = (file) => {
     const reader = new FileReader();
@@ -50,7 +72,7 @@ const FilePreview = ({ file }) => {
       {tableData.length > 0 ? (
         <Card className="p-4 shadow-lg mt-4 bg-light" style={{ width: "100%" }}>
           <h5 className="mb-3 text-primary">File Preview</h5>
-          <div className="table-responsive" style={{ maxHeight: "300px", border: "1px solid #ddd" }}>
+          <div ref={tableRef} className="table-responsive" style={{ maxHeight: "500px", overflowY: "auto", border: "1px solid #ddd" }}>
             <Table striped bordered hover size="sm" className="table-light">
               <thead className="bg-primary text-white" style={{ position: "sticky", top: 0, zIndex: 2 }}>
                 <tr>
@@ -60,7 +82,7 @@ const FilePreview = ({ file }) => {
                 </tr>
               </thead>
               <tbody>
-                {tableData.slice(0, 20).map((row, rowIndex) => (
+                {tableData.slice(0, visibleRows).map((row, rowIndex) => (
                   <tr key={rowIndex} className={rowIndex % 2 === 0 ? "bg-white" : "bg-light"}>
                     {tableHeaders.map((header, colIndex) => (
                       <td key={colIndex}>{row[header] !== undefined ? row[header] : "-"}</td>
