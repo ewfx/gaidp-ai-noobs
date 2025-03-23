@@ -9,7 +9,6 @@ const FilePreview = ({ file }) => {
 
   useEffect(() => {
     if (file) {
-      console.log("File detected:", file.name);
       previewFile(file);
     }
   }, [file]);
@@ -24,7 +23,6 @@ const FilePreview = ({ file }) => {
 
         if (result.data.length > 0) {
           const filteredData = result.data.filter(row => Object.values(row).some(val => val !== "" && val !== null));
-          console.log("CSV Data Parsed:", filteredData);
           setTableHeaders(Object.keys(filteredData[0] || {}));
           setTableData(filteredData);
         }
@@ -39,7 +37,6 @@ const FilePreview = ({ file }) => {
 
         if (sheet.length > 1) {
           const filteredData = sheet.slice(1).filter(row => row.some(val => val !== undefined && val !== ""));
-          console.log("Excel Data Parsed:", filteredData);
           setTableHeaders(sheet[0]);
           setTableData(filteredData);
         }
@@ -51,11 +48,11 @@ const FilePreview = ({ file }) => {
   return (
     <>
       {tableData.length > 0 ? (
-        <Card className="p-4 shadow-lg mt-4" style={{ width: "1200px" }}>
-          <h5 className="mb-3">File Preview</h5>
-          <div style={{ maxHeight: "250px", overflowY: "auto", overflowX: "auto", border: "1px solid #ddd" }}>
-            <Table striped bordered hover size="sm">
-              <thead className="table-dark" style={{ position: "sticky", top: 0, zIndex: 2 }}>
+        <Card className="p-4 shadow-lg mt-4 bg-light" style={{ width: "100%" }}>
+          <h5 className="mb-3 text-primary">File Preview</h5>
+          <div className="table-responsive" style={{ maxHeight: "300px", border: "1px solid #ddd" }}>
+            <Table striped bordered hover size="sm" className="table-light">
+              <thead className="bg-primary text-white" style={{ position: "sticky", top: 0, zIndex: 2 }}>
                 <tr>
                   {tableHeaders.map((header, index) => (
                     <th key={index}>{header}</th>
@@ -64,7 +61,7 @@ const FilePreview = ({ file }) => {
               </thead>
               <tbody>
                 {tableData.slice(0, 20).map((row, rowIndex) => (
-                  <tr key={rowIndex}>
+                  <tr key={rowIndex} className={rowIndex % 2 === 0 ? "bg-white" : "bg-light"}>
                     {tableHeaders.map((header, colIndex) => (
                       <td key={colIndex}>{row[header] !== undefined ? row[header] : "-"}</td>
                     ))}
