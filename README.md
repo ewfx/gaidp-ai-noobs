@@ -53,6 +53,6 @@ Describe the major technical or non-technical challenges your team encountered.
 - 🔹 Backend: Python
 
 ## 👥 Team
-- **Hitesh lalwani**
-- **Archit badola**
-- **Kirti chetan**
+- **Hitesh Lalwani**
+- **Archit Badola**
+- **Kirti Chetan**
