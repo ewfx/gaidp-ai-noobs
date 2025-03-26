@@ -14,17 +14,16 @@
 ---
 
 ## 🎯 Introduction
-A brief overview of your project and its purpose. Mention which problem statement are your attempting to solve. Keep it concise and engaging.
+This project automates data profiling for Wholesale Risk using Generative AI (Gen AI) and Unsupervised Machine Learning (ML) techniques. It extracts and interprets regulatory reporting instructions, generates data validation rules, and performs adaptive risk scoring to enhance compliance and risk management in banking. The project is designed to address the challenge of automating data validation and risk assessment in regulatory reporting (FR Y-14Q Schedule H).
 
 ## 🎥 Demo
-🔗 [Live Demo](#) (if applicable)  
-📹 [Video Demo](#) (if applicable)  
+📹 [Video Demo](https://github.com/ewfx/gaidp-ai-noobs/blob/develop/artifacts/demo/Wells_Fargo_Hackathon_2025_GenAI_Based_Data_Profiling.mp4)  
 🖼️ Screenshots:
 
 ![Screenshot 1](link-to-image)
 
 ## 💡 Inspiration
-What inspired you to create this project? Describe the problem you're solving.
+Regulatory reporting is complex and time-consuming, requiring financial institutions to adhere to stringent data quality standards. Manual data validation is prone to errors, leading to compliance risks and regulatory penalties. Our project aims to leverage AI to automate rule generation, risk scoring, and remediation actions, ensuring accuracy, efficiency, and compliance.
 
 ## ⚙️ What It Does
 Explain the key features and functionalities of your project.
@@ -38,22 +37,20 @@ Describe the major technical or non-technical challenges your team encountered.
 ## 🏃 How to Run
 1. Clone the repository  
    ```sh
-   git clone https://github.com/your-repo.git
+   git clone https://github.com/ewfx/gaidp-ai-noobs.git
    ```
 2. Install dependencies  
    ```sh
-   npm install  # or pip install -r requirements.txt (for Python)
+   npm install 
    ```
 3. Run the project  
    ```sh
-   npm start  # or python app.py
+   npm start
    ```
 
 ## 🏗️ Tech Stack
-- 🔹 Frontend: React / Vue / Angular
-- 🔹 Backend: Node.js / FastAPI / Django
-- 🔹 Database: PostgreSQL / Firebase
-- 🔹 Other: OpenAI API / Twilio / Stripe
+- 🔹 Frontend: React
+- 🔹 Backend: Python
 
 ## 👥 Team
 - **Hitesh Lalwani**
