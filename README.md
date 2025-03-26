@@ -18,7 +18,7 @@ A brief overview of your project and its purpose. Mention which problem statemen
 
 ## 🎥 Demo
 🔗 [Live Demo](#) (if applicable)  
-📹 [Video Demo](#) (if applicable)  
+📹 [Video Demo](https://github.com/ewfx/gaidp-ai-noobs/blob/develop/artifacts/demo/Wells_Fargo_Hackathon_2025_GenAI_Based_Data_Profiling.mp4) (if applicable)  
 🖼️ Screenshots:
 
 ![Screenshot 1](link-to-image)
